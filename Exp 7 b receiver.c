@@ -20,3 +20,10 @@ int main() {
  struct msg m1, m2;
  int qid;
  qid = msgget(MSGKEY, IPC_CREAT | 0666);
+msgrcv(qid, &m1, sizeof(m1.text), 1, 0);
+reverse(m1.text);
+ m2.type = 2;
+ strcpy(m2.text, m1.text);
+ msgsnd(qid, &m2, sizeof(m2.text), 0);
+ return 0;
+}
